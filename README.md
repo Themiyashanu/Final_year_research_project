@@ -1,65 +1,181 @@
-# Final Year Research Project
+# 📊 Machine Learning and Spatial Analysis of Service Adequacy  
+### Demographic Typology and Education–Health Service Analysis of GN Divisions in Uva Province, Sri Lanka
 
-This repository contains the data preparation and exploratory analysis work for my final year research project, focused on education and health-related indicators in the Uva region (Sri Lanka), using GN-level datasets.
+---
 
-## Project Structure
+## 📌 Project Overview
 
-- `data_raw/`  
-  Original input datasets (CSV files).
+This project aims to analyze demographic patterns and evaluate the adequacy of education and healthcare services at the **Grama Niladhari (GN) division level** in Uva Province, Sri Lanka.
 
-- `data_processed/`  
-  Cleaned/merged datasets and analysis outputs.
+The study integrates **data science, machine learning, and spatial analysis** to identify areas where public services may not sufficiently meet population needs.
 
-- `data_processed/pr1_outputs/`  
-  PR1-specific output tables (feature summaries, descriptive stats, correlations, PCA loadings, clustering outputs, etc.).
+---
 
-- `notebooks/`  
-  Jupyter notebooks used for data analysis and exploration:
-  - `PR1_EDA_Uva_Colab.ipynb`
-  - `Uva_Education_Health_Colab.ipynb`
+## 🎯 Objectives
 
-- `maps_qgis/`  
-  QGIS boundary-related files used for mapping support.
+- Analyze GN-level demographic structure (children, working-age, elderly)
+- Identify variation in population composition across GN divisions
+- Evaluate accessibility to schools and healthcare facilities
+- Detect potential service mismatch areas (high demand vs low access)
+- Apply machine learning techniques:
+  - K-means clustering (demographic typology)
+  - Classification models (service adequacy prediction)
 
-## Main Files
+---
 
-### Raw Data
-- `GN_facility_counts_clean.csv`
-- `GN_hospital_school_distances_km.csv`
-- `Health and School Counts.csv`
-- `gn_crosswalk_final.csv`
+## 📂 Datasets Used
 
-### Processed Data
-- `UVA_master_dataset_education_health.csv`
-- `pr1_outputs/01_feature_summary.csv`
-- `pr1_outputs/02_descriptive_statistics.csv`
-- `pr1_outputs/03_correlation_matrix.csv`
-- `pr1_outputs/04_district_comparison.csv`
-- `pr1_outputs/05_kmeans_cluster_summary.csv`
-- `pr1_outputs/06_pca_loadings.csv`
-- `pr1_outputs/07_correlation_dist_demographics.csv`
-- `pr1_outputs/uva_gn_pr1_with_distances.csv`
-- `pr1_outputs/uva_gn_pr1_cleaned_with_clusters.csv`
+### 1. Population Dataset
+- GN Code, GN Name, District
+- Total Population
+- Age groups:
+  - 0–14 (Children)
+  - 15–59 (Working age)
+  - 60–64, 65+ (Elderly)
 
-## Objectives
+### 2. Accessibility Data
+- Distance to nearest school (km)
+- Distance to nearest hospital (km)
 
-- Integrate education and health related GN-level datasets.
-- Perform exploratory data analysis (EDA).
-- Generate descriptive and comparative statistics.
-- Study relationships using correlation and PCA.
-- Identify GN patterns using clustering methods.
+### 3. Spatial Data
+- GN boundary shapefile
+- School locations
+- Hospital locations
 
-## Tools & Environment
+---
 
-- Python (via Jupyter/Colab notebooks)
-- CSV-based data processing
-- QGIS support files for geospatial context
+## ⚙️ Methodology
 
-## Notes
+### 🔹 1. Data Preprocessing
+- Data cleaning and validation
+- Handling missing values
+- Standardizing GN-level data
 
-- Some datasets may be large; use Git LFS if needed for very large files.
-- Keep sensitive/private data out of the repository.
+### 🔹 2. Feature Engineering
+- Population proportions:
+  - Children %
+  - Working %
+  - Elderly %
+- Dependency ratio calculation
+- Accessibility indicators
 
-## Author
+### 🔹 3. Exploratory Data Analysis (EDA)
+- Distribution analysis of demographic variables
+- Accessibility analysis (distance distributions)
+- Identification of hotspot GN divisions
+- District-level comparisons (Badulla vs Monaragala)
 
-Final Year Research Project - 2026
+### 🔹 4. Clustering (Unsupervised ML)
+- K-means clustering
+- Input features:
+  - p_children, p_working, p_elderly, dependency_ratio
+- Output:
+  - Demographic typology (cluster labels)
+
+### 🔹 5. Service Adequacy Modeling
+- Education adequacy:
+  - Schools per 1000 children
+- Health adequacy:
+  - Facilities per 1000 elderly
+- Quantile-based threshold labeling
+
+### 🔹 6. Predictive Modeling (Supervised ML)
+- Models:
+  - Logistic Regression
+  - Random Forest
+- Input features:
+  - Demographic + accessibility + cluster data
+- Output:
+  - Adequate / Inadequate classification
+
+### 🔹 7. Spatial Analysis
+- Mapping GN-level results using QGIS / GeoPandas
+- Visualization of:
+  - Clusters
+  - Accessibility
+  - Service adequacy
+
+---
+
+## 📊 Key Findings (EDA Stage)
+
+- Significant variation exists in demographic composition across GN divisions
+- Monaragala district shows higher average distances to services
+- Some GN divisions exhibit high population demand with low accessibility
+- Potential service gaps are more evident in rural areas
+
+---
+
+## 🧠 Machine Learning Components
+
+### 1. Clustering (Unsupervised)
+- Algorithm: K-means
+- Purpose: Identify demographic patterns
+
+### 2. Classification (Supervised)
+- Algorithms:
+  - Logistic Regression
+  - Random Forest
+- Target:
+  - Service adequacy label (0 = adequate, 1 = inadequate)
+
+---
+
+## 🗺️ Tools and Technologies
+
+- Python (Pandas, NumPy, Scikit-learn)
+- Matplotlib / Seaborn
+- GeoPandas
+- QGIS
+- Jupyter Notebook / Google Colab
+
+---
+
+## 📈 Outputs
+
+- Cleaned GN-level dataset
+- Demographic indicators
+- Cluster classifications
+- Service adequacy labels
+- Machine learning model results
+- Spatial maps
+
+---
+
+## 🚧 Project Status
+
+- ✅ Data collection completed
+- ✅ Data preprocessing completed
+- ✅ Exploratory Data Analysis completed
+- 🔄 Clustering and modeling in progress
+- 🔄 Spatial analysis refinement ongoing
+
+---
+
+## ⚠️ Limitations
+
+- GN-level facility counts may be approximated
+- Accessibility measured using distance (not travel time)
+- Cross-sectional data (no temporal variation)
+
+---
+
+## 📌 Future Work
+
+- Improve feature set with finer age segmentation
+- Enhance model performance with additional variables
+- Incorporate travel time-based accessibility
+- Develop policy recommendation framework
+
+---
+
+## 👨‍💻 Author
+
+Final Year Undergraduate  
+BSc in Data Science  
+
+---
+
+## 📜 License
+
+This project is for academic and research purposes only.
